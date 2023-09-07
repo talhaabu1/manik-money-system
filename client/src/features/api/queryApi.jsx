@@ -1,8 +1,8 @@
 import { baseApi } from "./baseApi";
 
 const queryApi = baseApi.injectEndpoints({
-  endpoints: (build) => ({
-    getJson: build.query({
+  endpoints: (builder) => ({
+    getJson: builder.query({
       query: (id) => `/todos/${id}`,
     }),
   }),

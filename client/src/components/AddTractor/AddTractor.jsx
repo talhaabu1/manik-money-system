@@ -1,23 +1,27 @@
 import ReactDatePicker from "react-datepicker";
 import "./AddTractor.css";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import { useForm } from "react-hook-form";
-import { userContext } from "../../App";
+import { useAddTractorMutation } from "../../features/api/mutationApi";
 
 const AddTractor = () => {
-  const { setDatau } = useContext(userContext);
   const [startDate, setStartDate] = useState(new Date());
 
+  //? add data redux hook mutation start ⤵
+  const [setPost, { data: postData }] = useAddTractorMutation();
+  //? add data redux hook mutation end ⤴
+  console.log(postData);
+  //? hook form user ⤵
   const { register, handleSubmit } = useForm();
 
   // my tractor history data sta ☸
   const onSubmit = (data) => {
-    // string to number fuction start ⬇
+    // string to number fuction start ⤵
     const stringToNumber = (value) => {
       return Number(value);
     };
-    // string to number fuction end ⬆
+    // string to number fuction end ⤴
 
     const { bigha, oileMoney, oil, expence } = data;
     const driverMoney = stringToNumber(bigha) * 75;
@@ -30,7 +34,7 @@ const AddTractor = () => {
         helperMoney +
         stringToNumber(expence) +
         stringToNumber(oileMoney));
-    const sendData = {
+    const allData = {
       ...data,
       driverMoney,
       helperMoney,
@@ -39,7 +43,7 @@ const AddTractor = () => {
       totalExpense,
       date: startDate.toDateString(),
     };
-    console.log(sendData);
+    setPost(allData);
   };
   // my tractor history data end ☸
   return (

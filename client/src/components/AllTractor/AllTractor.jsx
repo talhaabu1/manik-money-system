@@ -1,11 +1,7 @@
-import { useContext } from "react";
-import { userContext } from "../../App";
 import "./AllTractor.css";
 // import ReactDatePicker from "react-datepicker";
 const AllTractor = () => {
   // const [startDate, setStartDate] = useState(new Date());
-  const { dataU } = useContext(userContext);
-  console.log("🚀 ~ file: AllTractor.jsx:6 ~ AllTractor ~ dataU:", dataU);
 
   return (
     <div className=" ">
