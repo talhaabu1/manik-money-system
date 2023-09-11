@@ -4,10 +4,11 @@ const mutationApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     addTractor: builder.mutation({
       query: (data) => ({
-        url: "/posts",
+        url: "/tractor",
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["Tractor"],
     }),
   }),
 });

@@ -30,8 +30,10 @@ export const rotuer = createBrowserRouter([
         element: <AllTractor />,
       },
       {
-        path: "/tractordetails",
+        path: "/tractordetails/:id",
         element: <TractorDetail />,
+        loader: async ({ params }) =>
+          fetch(`${import.meta.env.VITE_BASE_URL}/tractor/${params.id}`),
       },
     ],
   },

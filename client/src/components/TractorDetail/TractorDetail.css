@@ -1,3 +1,9 @@
 .card-shdow {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
+
+.svg-icon {
+  vertical-align: middle;
+  fill: currentColor;
+  overflow: hidden;
+}

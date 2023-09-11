@@ -1,9 +1,10 @@
 import ReactDatePicker from "react-datepicker";
 import "./AddTractor.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import { useForm } from "react-hook-form";
 import { useAddTractorMutation } from "../../features/api/mutationApi";
+import toast from "react-hot-toast";
 
 const AddTractor = () => {
   const [startDate, setStartDate] = useState(new Date());
@@ -11,18 +12,18 @@ const AddTractor = () => {
   //? add data redux hook mutation start ⤵
   const [setPost, { data: postData }] = useAddTractorMutation();
   //? add data redux hook mutation end ⤴
-  console.log(postData);
   //? hook form user ⤵
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
 
   // my tractor history data sta ☸
   const onSubmit = (data) => {
     // string to number fuction start ⤵
     const stringToNumber = (value) => {
-      return Number(value);
+      return parseFloat(value);
     };
     // string to number fuction end ⤴
 
+    //? hisabe kithebe calculate ⤵
     const { bigha, oileMoney, oil, expence } = data;
     const driverMoney = stringToNumber(bigha) * 75;
     const helperMoney = stringToNumber(bigha) * 15;
@@ -34,6 +35,7 @@ const AddTractor = () => {
         helperMoney +
         stringToNumber(expence) +
         stringToNumber(oileMoney));
+    //? all data const
     const allData = {
       ...data,
       driverMoney,
@@ -43,9 +45,25 @@ const AddTractor = () => {
       totalExpense,
       date: startDate.toDateString(),
     };
+    //? psot data call
     setPost(allData);
+
+    //? hisabe kithebe calculate ⤴
   };
   // my tractor history data end ☸
+
+  //? toast check data add successfully ⤵
+  useEffect(() => {
+    if (postData?.status) {
+      toast.success("Data Saved Success");
+      reset();
+    }
+    if (!postData?.status && postData?.status === false) {
+      toast.error("Data Saved not Success");
+    }
+  }, [postData, reset]);
+  //? toast check data add successfully ⤴
+
   return (
     <div className=" mt-[5%]">
       <div>
@@ -79,7 +97,7 @@ const AddTractor = () => {
                   required
                   {...register("bigha")}
                   id="Bigha"
-                  type="text"
+                  type="number"
                   className="block w-full px-4 py-2 mt-2 text-gray-700  bg-white border border-gray-200 rounded-md"
                 />
               </div>
@@ -91,7 +109,7 @@ const AddTractor = () => {
                   required
                   {...register("oileMoney")}
                   id="Helper"
-                  type="text"
+                  type="number"
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md"
                 />
               </div>
@@ -103,7 +121,7 @@ const AddTractor = () => {
                   required
                   {...register("oil")}
                   id="oil"
-                  type="text"
+                  type="number"
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md"
                 />
               </div>
@@ -118,7 +136,7 @@ const AddTractor = () => {
                   required
                   {...register("outstandingamount")}
                   id="Expense"
-                  type="text"
+                  type="number"
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md"
                 />
               </div>
@@ -148,7 +166,7 @@ const AddTractor = () => {
                   required
                   {...register("expence")}
                   id="Expence"
-                  type="text"
+                  type="number"
                   className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md"
                 />
               </div>

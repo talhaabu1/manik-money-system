@@ -1,16 +1,18 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
-const tractor = require("./router/tractorRouter");
+const cors = require("cors");
 const app = express();
+const tractorHandeler = require("./router/tractorHandeler");
 const Port = process.env.PORT || 8080;
 
-//? call express.json.dotenv middleware ⤵
+//? call express.json.dotenv.cors middleware ⤵
 dotenv.config();
 app.use(express.json());
-//? call express.json middleware ⤴
+app.use(cors());
+//? call express.json.dotenv.cors middleware ⤴
 
-//? connect local server ⤵
+//? connect  server ⤵
 mongoose
   .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
@@ -18,10 +20,10 @@ mongoose
   })
   .then(() => console.log("connection SuccessFull"))
   .catch((err) => console.log(err));
-//? connect local server ⤴
+//? connect  server ⤴
 
 //? all routurs use call ⤵
-app.use("/tractor", tractor);
+app.use("/tractor", tractorHandeler);
 //? all routurs use call ⤴
 
 //? not validate router error handaler ⤵

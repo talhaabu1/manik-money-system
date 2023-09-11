@@ -1,13 +1,35 @@
+import { Link } from "react-router-dom";
+import { useAllTractorQuery } from "../../features/api/queryApi";
 import "./AllTractor.css";
+import { InfinitySpin } from "react-loader-spinner";
+// import ReactDatePicker from "react-datepicker";
+// import { useState } from "react";
 // import ReactDatePicker from "react-datepicker";
 const AllTractor = () => {
   // const [startDate, setStartDate] = useState(new Date());
+  //? one color and tow color change ⤵
+  // const colors = ["bg-slate-600", "bg-slate-200", ${colors[i % colors.length]}];
+  //? one color and tow color change ⤴
+
+  //? All Tractor Featch ⤵
+  const { data, isLoading } = useAllTractorQuery();
+  //? All Tractor Featch ⤴
+
+  //? loading ⤵
+  if (isLoading) {
+    return (
+      <div className=" flex justify-center items-center h-screen">
+        <InfinitySpin width="300" color="black" />
+      </div>
+    );
+  }
+  //? loading ⤴
 
   return (
     <div className=" ">
       {/* <ReactDatePicker
         required
-        className=" w-full text-center bg-slate-200"
+        className=" w-full text-center bg-slate-400 marl"
         id="date"
         selected={startDate}
         onChange={(date) => setStartDate(date)}
@@ -23,282 +45,23 @@ const AllTractor = () => {
             </tr>
           </thead>
           <tbody className=" text-center tex">
-            {/* row 1 */}
-            <tr className=" border-t-[2px]">
-              <th className=" border-r-[1px]">1</th>
-              <td className=" border-r-[1px] text-base font-bold">
-                Tue Aug 29 2023
-              </td>
-              <td>
-                <button className="btn btn-sm btn-outline btn-info rounded-full normal-case ">
-                  Details
-                </button>
-              </td>
-            </tr>
-            <tr className=" border-t-[2px]">
-              <th className=" border-r-[1px]">1</th>
-              <td className=" border-r-[1px] text-base font-bold">
-                Tue Aug 29 2023
-              </td>
-              <td>
-                <button className="btn btn-sm btn-outline btn-info rounded-full normal-case ">
-                  Details
-                </button>
-              </td>
-            </tr>
-            <tr className=" border-t-[2px]">
-              <th className=" border-r-[1px]">1</th>
-              <td className=" border-r-[1px] text-base font-bold">
-                Tue Aug 29 2023
-              </td>
-              <td>
-                <button className="btn btn-sm btn-outline btn-info rounded-full normal-case ">
-                  Details
-                </button>
-              </td>
-            </tr>
-            <tr className=" border-t-[2px]">
-              <th className=" border-r-[1px]">1</th>
-              <td className=" border-r-[1px] text-base font-bold">
-                Tue Aug 29 2023
-              </td>
-              <td>
-                <button className="btn btn-sm btn-outline btn-info rounded-full normal-case ">
-                  Details
-                </button>
-              </td>
-            </tr>
-            <tr className=" border-t-[2px]">
-              <th className=" border-r-[1px]">1</th>
-              <td className=" border-r-[1px] text-base font-bold">
-                Tue Aug 29 2023
-              </td>
-              <td>
-                <button className="btn btn-sm btn-outline btn-info rounded-full normal-case ">
-                  Details
-                </button>
-              </td>
-            </tr>
-            <tr className=" border-t-[2px]">
-              <th className=" border-r-[1px]">1</th>
-              <td className=" border-r-[1px] text-base font-bold">
-                Tue Aug 29 2023
-              </td>
-              <td>
-                <button className="btn btn-sm btn-outline btn-info rounded-full normal-case ">
-                  Details
-                </button>
-              </td>
-            </tr>
-            <tr className=" border-t-[2px]">
-              <th className=" border-r-[1px]">1</th>
-              <td className=" border-r-[1px] text-base font-bold">
-                Tue Aug 29 2023
-              </td>
-              <td>
-                <button className="btn btn-sm btn-outline btn-info rounded-full normal-case ">
-                  Details
-                </button>
-              </td>
-            </tr>
-            <tr className=" border-t-[2px]">
-              <th className=" border-r-[1px]">1</th>
-              <td className=" border-r-[1px] text-base font-bold">
-                Tue Aug 29 2023
-              </td>
-              <td>
-                <button className="btn btn-sm btn-outline btn-info rounded-full normal-case ">
-                  Details
-                </button>
-              </td>
-            </tr>
-            <tr className=" border-t-[2px]">
-              <th className=" border-r-[1px]">1</th>
-              <td className=" border-r-[1px] text-base font-bold">
-                Tue Aug 29 2023
-              </td>
-              <td>
-                <button className="btn btn-sm btn-outline btn-info rounded-full normal-case ">
-                  Details
-                </button>
-              </td>
-            </tr>
-            <tr className=" border-t-[2px]">
-              <th className=" border-r-[1px]">1</th>
-              <td className=" border-r-[1px] text-base font-bold">
-                Tue Aug 29 2023
-              </td>
-              <td>
-                <button className="btn btn-sm btn-outline btn-info rounded-full normal-case ">
-                  Details
-                </button>
-              </td>
-            </tr>
-            <tr className=" border-t-[2px]">
-              <th className=" border-r-[1px]">1</th>
-              <td className=" border-r-[1px] text-base font-bold">
-                Tue Aug 29 2023
-              </td>
-              <td>
-                <button className="btn btn-sm btn-outline btn-info rounded-full normal-case ">
-                  Details
-                </button>
-              </td>
-            </tr>
-            <tr className=" border-t-[2px]">
-              <th className=" border-r-[1px]">1</th>
-              <td className=" border-r-[1px] text-base font-bold">
-                Tue Aug 29 2023
-              </td>
-              <td>
-                <button className="btn btn-sm btn-outline btn-info rounded-full normal-case ">
-                  Details
-                </button>
-              </td>
-            </tr>
-            <tr className=" border-t-[2px]">
-              <th className=" border-r-[1px]">1</th>
-              <td className=" border-r-[1px] text-base font-bold">
-                Tue Aug 29 2023
-              </td>
-              <td>
-                <button className="btn btn-sm btn-outline btn-info rounded-full normal-case ">
-                  Details
-                </button>
-              </td>
-            </tr>
-            <tr className=" border-t-[2px]">
-              <th className=" border-r-[1px]">1</th>
-              <td className=" border-r-[1px] text-base font-bold">
-                Tue Aug 29 2023
-              </td>
-              <td>
-                <button className="btn btn-sm btn-outline btn-info rounded-full normal-case ">
-                  Details
-                </button>
-              </td>
-            </tr>
-            <tr className=" border-t-[2px]">
-              <th className=" border-r-[1px]">1</th>
-              <td className=" border-r-[1px] text-base font-bold">
-                Tue Aug 29 2023
-              </td>
-              <td>
-                <button className="btn btn-sm btn-outline btn-info rounded-full normal-case ">
-                  Details
-                </button>
-              </td>
-            </tr>
-            <tr className=" border-t-[2px]">
-              <th className=" border-r-[1px]">1</th>
-              <td className=" border-r-[1px] text-base font-bold">
-                Tue Aug 29 2023
-              </td>
-              <td>
-                <button className="btn btn-sm btn-outline btn-info rounded-full normal-case ">
-                  Details
-                </button>
-              </td>
-            </tr>
-            <tr className=" border-t-[2px]">
-              <th className=" border-r-[1px]">1</th>
-              <td className=" border-r-[1px] text-base font-bold">
-                Tue Aug 29 2023
-              </td>
-              <td>
-                <button className="btn btn-sm btn-outline btn-info rounded-full normal-case ">
-                  Details
-                </button>
-              </td>
-            </tr>
-            <tr className=" border-t-[2px]">
-              <th className=" border-r-[1px]">1</th>
-              <td className=" border-r-[1px] text-base font-bold">
-                Tue Aug 29 2023
-              </td>
-              <td>
-                <button className="btn btn-sm btn-outline btn-info rounded-full normal-case ">
-                  Details
-                </button>
-              </td>
-            </tr>
-            <tr className=" border-t-[2px]">
-              <th className=" border-r-[1px]">1</th>
-              <td className=" border-r-[1px] text-base font-bold">
-                Tue Aug 29 2023
-              </td>
-              <td>
-                <button className="btn btn-sm btn-outline btn-info rounded-full normal-case ">
-                  Details
-                </button>
-              </td>
-            </tr>
-            <tr className=" border-t-[2px]">
-              <th className=" border-r-[1px]">1</th>
-              <td className=" border-r-[1px] text-base font-bold">
-                Tue Aug 29 2023
-              </td>
-              <td>
-                <button className="btn btn-sm btn-outline btn-info rounded-full normal-case ">
-                  Details
-                </button>
-              </td>
-            </tr>
-            <tr className=" border-t-[2px]">
-              <th className=" border-r-[1px]">1</th>
-              <td className=" border-r-[1px] text-base font-bold">
-                Tue Aug 29 2023
-              </td>
-              <td>
-                <button className="btn btn-sm btn-outline btn-info rounded-full normal-case ">
-                  Details
-                </button>
-              </td>
-            </tr>
-            <tr className=" border-t-[2px]">
-              <th className=" border-r-[1px]">1</th>
-              <td className=" border-r-[1px] text-base font-bold">
-                Tue Aug 29 2023
-              </td>
-              <td>
-                <button className="btn btn-sm btn-outline btn-info rounded-full normal-case ">
-                  Details
-                </button>
-              </td>
-            </tr>
-            <tr className=" border-t-[2px]">
-              <th className=" border-r-[1px]">1</th>
-              <td className=" border-r-[1px] text-base font-bold">
-                Tue Aug 29 2023
-              </td>
-              <td>
-                <button className="btn btn-sm btn-outline btn-info rounded-full normal-case ">
-                  Details
-                </button>
-              </td>
-            </tr>
-            <tr className=" border-t-[2px]">
-              <th className=" border-r-[1px]">1</th>
-              <td className=" border-r-[1px] text-base font-bold">
-                Tue Aug 29 2023
-              </td>
-              <td>
-                <button className="btn btn-sm btn-outline btn-info rounded-full normal-case ">
-                  Details
-                </button>
-              </td>
-            </tr>
-            <tr className=" border-t-[2px]">
-              <th className=" border-r-[1px]">1</th>
-              <td className=" border-r-[1px] text-base font-bold">
-                Tue Aug 29 2023
-              </td>
-              <td>
-                <button className="btn btn-sm btn-outline btn-info rounded-full normal-case ">
-                  Details
-                </button>
-              </td>
-            </tr>
+            {/* all tractor list map */}
+            {data?.data.map((item, i) => (
+              <tr className={`border-t-[2px]`} key={i}>
+                <th className=" border-r-[1px]">{i + 1}</th>
+                <td className=" border-r-[1px] text-base font-bold">
+                  {item.date}
+                </td>
+                <td>
+                  <Link
+                    to={`/tractordetails/${item._id}`}
+                    className="btn btn-sm btn-outline btn-info rounded-full normal-case "
+                  >
+                    Details
+                  </Link>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

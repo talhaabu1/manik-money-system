@@ -2,10 +2,11 @@ import { baseApi } from "./baseApi";
 
 const queryApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getJson: builder.query({
-      query: (id) => `/todos/${id}`,
+    allTractor: builder.query({
+      query: () => "/tractor",
+      providesTags: ["Tractor"],
     }),
   }),
 });
 
-export const { useGetJsonQuery } = queryApi;
+export const { useAllTractorQuery } = queryApi;
