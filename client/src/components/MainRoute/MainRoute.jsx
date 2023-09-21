@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation, useParams } from "react-router-dom";
 import "./MainRoute.css";
 import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
 import { useState } from "react";
@@ -7,10 +7,12 @@ import { BsListUl } from "react-icons/bs";
 import { GoPersonAdd } from "react-icons/go";
 import { FaTractor } from "react-icons/fa6";
 import { MdOutlineNoteAdd } from "react-icons/md";
+import Headroom from "react-headroom";
 
 const MainRoute = () => {
   const [toggled, setToggled] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
+  const { pathname } = useLocation();
 
   return (
     <section className="layout">
@@ -22,8 +24,7 @@ const MainRoute = () => {
             toggled={toggled}
             breakPoint="lg"
             collapsed={collapsed}
-            backgroundColor=" white"
-          >
+            backgroundColor=" white">
             <Menu className="  " closeOnClick={true}>
               <MenuItem
                 className=" "
@@ -35,16 +36,14 @@ const MainRoute = () => {
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="w-10 h-10"
-                  >
+                    className="w-10 h-10">
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
                       d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
                     />
                   </svg>
-                }
-              >
+                }>
                 Profile
               </MenuItem>
               <SubMenu
@@ -55,8 +54,7 @@ const MainRoute = () => {
                     viewBox="0 0 24 24"
                     strokeWidth={1.5}
                     stroke="currentColor"
-                    className="w-10 h-10"
-                  >
+                    className="w-10 h-10">
                     <path
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -64,33 +62,30 @@ const MainRoute = () => {
                     />
                   </svg>
                 }
-                label="Passenger"
-              >
+                label="Passenger">
                 <MenuItem icon={<BsListUl className=" w-10 h-10" />}>
                   All Passenger
                 </MenuItem>
                 <MenuItem
                   className=""
                   component={<Link to="addpassenger" />}
-                  icon={<GoPersonAdd className="w-10 h-10" />}
-                >
+                  icon={<GoPersonAdd className="w-10 h-10" />}>
                   Add Passenger
                 </MenuItem>
               </SubMenu>
               <SubMenu
                 icon={<FaTractor className=" w-10 h-10" />}
-                label="Tractor"
-              >
+                label="Tractor">
                 <MenuItem
+                  onClick={() => setToggled(false)}
                   component={<Link to="alltractor" />}
-                  icon={<BsListUl className=" w-10 h-10" />}
-                >
+                  icon={<BsListUl className=" w-10 h-10" />}>
                   All Tractor History
                 </MenuItem>
                 <MenuItem
+                  onClick={() => setToggled(false)}
                   component={<Link to="addtractor" />}
-                  icon={<MdOutlineNoteAdd className=" w-10 h-10" />}
-                >
+                  icon={<MdOutlineNoteAdd className=" w-10 h-10" />}>
                   Add Tractor History
                 </MenuItem>
               </SubMenu>
@@ -99,35 +94,39 @@ const MainRoute = () => {
         </div>
       </div>
       <div className="body">
-        <div className=" bg-[white] h-10 flex items-center justify-between py-6 shadow-lg ">
-          <button className=" lg:hidden" onClick={() => setToggled(!toggled)}>
-            <Hamburger
-              size={30}
-              rounded
-              toggled={toggled}
-              toggle={setToggled}
-            />
-          </button>
-          <button
-            className=" hidden  lg:block xl:block"
-            onClick={() => setCollapsed(!collapsed)}
-          >
-            <Hamburger
-              size={30}
-              rounded
-              toggled={!collapsed}
-              toggle={setCollapsed}
-            />
-          </button>
-          <h1 className=" flex items-center">
-            <img
-              className="h-10 mr-1"
-              src="https://cdn-icons-png.flaticon.com/128/9165/9165762.png"
-              alt="logo"
-            />
-            <p className="mr-1 xl:mr-5 text-xl font-bold">Tilkapur-Travlse</p>
-          </h1>
-        </div>
+        <Headroom>
+          <div
+            className={` bg-[white] h-10 flex items-center justify-between py-6 ${
+              pathname === "/alltractor" ? "shadow-none" : "shadow-lg"
+            }`}>
+            <button className=" lg:hidden" onClick={() => setToggled(!toggled)}>
+              <Hamburger
+                size={30}
+                rounded
+                toggled={toggled}
+                toggle={setToggled}
+              />
+            </button>
+            <button
+              className=" hidden  lg:block xl:block"
+              onClick={() => setCollapsed(!collapsed)}>
+              <Hamburger
+                size={30}
+                rounded
+                toggled={!collapsed}
+                toggle={setCollapsed}
+              />
+            </button>
+            <h1 className=" flex items-center">
+              <img
+                className="h-10 mr-1"
+                src="https://cdn-icons-png.flaticon.com/128/9165/9165762.png"
+                alt="logo"
+              />
+              <p className="mr-1 xl:mr-5 text-xl font-bold">Tilkapur-Travlse</p>
+            </h1>
+          </div>
+        </Headroom>
         <Outlet />
       </div>
     </section>

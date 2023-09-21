@@ -24,17 +24,23 @@ const AddTractor = () => {
     // string to number fuction end ⤴
 
     //? hisabe kithebe calculate ⤵
-    const { bigha, oileMoney, oil, expence } = data;
+    const { bigha, oileMoney, oil, expence, outstandingamount } = data;
     const driverMoney = stringToNumber(bigha) * 75;
     const helperMoney = stringToNumber(bigha) * 15;
     const oilLiterPoient = stringToNumber(oil) / stringToNumber(bigha);
     const totalIncome = stringToNumber(bigha) * 500;
     const totalExpense =
+      driverMoney +
+      helperMoney +
+      stringToNumber(expence) +
+      stringToNumber(oileMoney);
+    const totalAmountDeposited =
       stringToNumber(totalIncome) -
       (driverMoney +
         helperMoney +
         stringToNumber(expence) +
-        stringToNumber(oileMoney));
+        stringToNumber(oileMoney) +
+        stringToNumber(outstandingamount));
     //? all data const
     const allData = {
       ...data,
@@ -44,6 +50,7 @@ const AddTractor = () => {
       totalIncome,
       totalExpense,
       date: startDate.toDateString(),
+      totalAmountDeposited,
     };
     //? psot data call
     setPost(allData);
@@ -76,8 +83,7 @@ const AddTractor = () => {
               <div>
                 <label
                   className="text-gray-700 font-semibold block"
-                  htmlFor="date"
-                >
+                  htmlFor="date">
                   Date
                 </label>
                 <ReactDatePicker
@@ -128,8 +134,7 @@ const AddTractor = () => {
               <div>
                 <label
                   className="text-gray-700 font-semibold"
-                  htmlFor="Expense"
-                >
+                  htmlFor="Expense">
                   Outstanding Amount
                 </label>
                 <input
@@ -143,8 +148,7 @@ const AddTractor = () => {
               <div>
                 <label
                   className="text-gray-700 font-semibold"
-                  htmlFor="HelperName"
-                >
+                  htmlFor="HelperName">
                   Helper Name
                 </label>
                 <input
@@ -158,8 +162,7 @@ const AddTractor = () => {
               <div>
                 <label
                   className="text-gray-700 font-semibold"
-                  htmlFor="Expence"
-                >
+                  htmlFor="Expence">
                   Expense
                 </label>
                 <input
@@ -174,8 +177,7 @@ const AddTractor = () => {
             <div className="flex justify-end mt-6">
               <button
                 type="submit"
-                className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
-              >
+                className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
                 Save
               </button>
             </div>

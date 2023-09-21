@@ -51,6 +51,10 @@ const tractorSchema = new Schema({
     type: Number,
     required: true,
   },
+  totalAmountDeposited: {
+    type: Number,
+    required: true,
+  },
 });
 //? schema validation ⤴
 

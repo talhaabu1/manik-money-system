@@ -16,8 +16,7 @@ const Error = () => {
           <div className="flex items-center mt-6 gap-x-3">
             <Link
               to="/"
-              className="w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 sm:w-auto"
-            >
+              className="w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg shrink-0 sm:w-auto">
               Take me home
             </Link>
           </div>
@@ -26,7 +25,7 @@ const Error = () => {
           <img
             className="w-full max-w-lg lg:mx-auto"
             src="https://cdn-icons-png.flaticon.com/128/8452/8452928.png"
-            alt
+            alt="flaticon"
           />
         </div>
       </div>

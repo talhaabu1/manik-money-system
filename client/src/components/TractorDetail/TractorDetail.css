@@ -7,3 +7,14 @@
   fill: currentColor;
   overflow: hidden;
 }
+
+.modalBg {
+  background-image: repeating-linear-gradient(
+      135deg,
+      rgba(4, 13, 18, 0.01) 0px,
+      rgba(4, 13, 18, 0.01) 2px,
+      transparent 2px,
+      transparent 4px
+    ),
+    linear-gradient(90deg, rgb(249, 249, 249), rgb(249, 249, 249));
+}

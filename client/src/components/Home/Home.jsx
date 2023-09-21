@@ -1,9 +1,6 @@
 import "./Home.css";
 const Home = () => {
-  //? number to string ⤵
-
-  //? number to string ⤴
-  return <div></div>;
+  return <div>Name</div>;
 };
 
 export default Home;

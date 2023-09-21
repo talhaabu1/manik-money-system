@@ -9,7 +9,7 @@ const Tractor = model("Tractor", tractorSchema);
 //? Tractor all get router ⤵
 router.get("/", async (req, res) => {
   try {
-    const data = await Tractor.find({});
+    const data = await Tractor.find({}).select("date");
     res.send({
       message: "Successfully Find",
       data: data.reverse(),
@@ -68,5 +68,48 @@ router.post("/", async (req, res) => {
   }
 });
 //? Tractor post router ⤴
+
+//? Tractor Delete router ⤵
+router.delete("/:id", async (req, res) => {
+  try {
+    const deleteRes = await Tractor.deleteOne({ _id: req.params.id });
+    res.send({
+      message: "Tractor Delete successfully",
+      status: true,
+      statusCode: 200,
+      data: deleteRes,
+    });
+  } catch (err) {
+    console.error(err.message);
+    res.send({
+      message: "Tractor Delete not successfully",
+      status: false,
+      statusCode: 500,
+    });
+  }
+});
+//? Tractor Delete router ⤴
+
+//? Tractor Update router ⤵
+router.put("/:id", async (req, res) => {
+  const filter = { _id: req.params.id };
+  try {
+    const updateRes = await Tractor.replaceOne(filter, req.body);
+    res.send({
+      message: "Tractor Update successfully",
+      status: true,
+      statusCode: 200,
+      data: updateRes,
+    });
+  } catch (err) {
+    console.error(err.message);
+    res.send({
+      message: "Tractor Update not successfully",
+      status: false,
+      statusCode: 500,
+    });
+  }
+});
+//? Tractor Update router ⤴
 
 module.exports = router;

@@ -15,18 +15,20 @@ const AllTractor = () => {
   const { data, isLoading } = useAllTractorQuery();
   //? All Tractor Featch ⤴
 
+  const name = () => {};
+
   //? loading ⤵
   if (isLoading) {
     return (
       <div className=" flex justify-center items-center h-screen">
-        <InfinitySpin width="300" color="black" />
+        <InfinitySpin width="200" color="black" />
       </div>
     );
   }
   //? loading ⤴
 
   return (
-    <div className=" ">
+    <div>
       {/* <ReactDatePicker
         required
         className=" w-full text-center bg-slate-400 marl"
@@ -46,7 +48,7 @@ const AllTractor = () => {
           </thead>
           <tbody className=" text-center tex">
             {/* all tractor list map */}
-            {data?.data.map((item, i) => (
+            {data?.data?.map((item, i) => (
               <tr className={`border-t-[2px]`} key={i}>
                 <th className=" border-r-[1px]">{i + 1}</th>
                 <td className=" border-r-[1px] text-base font-bold">
@@ -55,8 +57,7 @@ const AllTractor = () => {
                 <td>
                   <Link
                     to={`/tractordetails/${item._id}`}
-                    className="btn btn-sm btn-outline btn-info rounded-full normal-case "
-                  >
+                    className="btn btn-sm  bg-gradient-to-r  from-[#808080] to-[#b5b5b5] text-white  rounded-full normal-case">
                     Details
                   </Link>
                 </td>

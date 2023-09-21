@@ -1,22 +1,41 @@
 import { FaMoneyBillWaveAlt } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
+import { FaMoneyBillTransfer } from "react-icons/fa6";
 import "./TractorDetail.css";
-import { useLoaderData } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import DeleteModal from "./Modal/DeleteModal";
+import { useTractorGetByIdQuery } from "../../features/api/queryApi";
+import { InfinitySpin } from "react-loader-spinner";
+import UpdateModal from "./Modal/UpdateModal";
+import { useState } from "react";
 
 const TractorDetail = () => {
-  const { data } = useLoaderData();
-  console.log("🚀 ~ file: TractorDetail.jsx:7 ~ TractorDetail ~ data:", data);
+  const { id } = useParams();
+
+  const { data: isData, isLoading } = useTractorGetByIdQuery(id);
+
+  const { data } = isData || {};
+
+  //? loading ⤵
+  if (isLoading) {
+    return (
+      <div className=" flex justify-center items-center h-screen">
+        <InfinitySpin width="200" color="black" />
+      </div>
+    );
+  } else {
+  }
+  //? loading ⤴
 
   return (
-    <div>
-      <div className=" grid grid-cols-1 xl:grid-cols-3 px-1 xl:px-3  xl:gap-x-6 gap-y-3 xl:gap-y-6 mt-6  xl:mt-10 mb-5 xl:mb-0 ">
+    <div className="">
+      <div className=" grid grid-cols-1  md:grid-cols-2 md:gap-x-2 xl:grid-cols-3 px-1 xl:px-3  xl:gap-x-6 gap-y-3 xl:gap-y-6 mt-6  xl:mt-10 mb-5 xl:mb-0">
         <div className="flex w-full  overflow-hidden bg-white rounded-lg card-shdow">
           <div className="flex items-center justify-center w-12 bg-emerald-500">
             <svg
               className="w-6 h-6 text-white fill-current"
               xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-            >
+              viewBox="0 0 24 24">
               <path d="M2 11H22V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V11ZM17 3H21C21.5523 3 22 3.44772 22 4V9H2V4C2 3.44772 2.44772 3 3 3H7V1H9V3H15V1H17V3Z"></path>
             </svg>
           </div>
@@ -25,7 +44,7 @@ const TractorDetail = () => {
               <span className=" text-lg font-semibold text-emerald-500 ">
                 Date
               </span>
-              <p className="text-lg   text-gray-600 font-bold">{data.date}</p>
+              <p className="text-lg   text-gray-600 font-bold">{data?.date}</p>
             </div>
           </div>
         </div>
@@ -35,8 +54,7 @@ const TractorDetail = () => {
               className="w-7 h-6 text-white fill-current"
               viewBox="0 0 1304 1024"
               version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+              xmlns="http://www.w3.org/2000/svg">
               <path d="M1302.196532 952.971098c5.919075 17.757225 0 35.514451-11.83815 47.352601-11.83815 11.83815-29.595376 23.676301-47.352602 23.676301H59.190751c-17.757225 0-35.514451-5.919075-47.352601-23.676301s-11.83815-29.595376-11.83815-47.352601l118.381503-591.907514c5.919075-29.595376 29.595376-47.352601 59.190751-47.352601h118.381503c35.514451 0 59.190751 23.676301 59.190752 59.190751s-23.676301 59.190751-59.190752 59.190752H224.924855l-94.705202 473.526011h1041.757226l-94.705203-473.526011H1006.242775c-35.514451 0-59.190751-23.676301-59.190752-59.190752s23.676301-59.190751 59.190752-59.190751h118.381502c29.595376 0 53.271676 17.757225 59.190752 47.352601l118.381503 591.907514zM514.959538 378.820809c-29.595376-17.757225-65.109827-5.919075-76.947977 23.676301-17.757225 23.676301-11.83815 59.190751 17.757225 76.947977L591.907514 556.393064v183.491329c0 35.514451 23.676301 59.190751 59.190752 59.190752s59.190751-23.676301 59.190751-59.190752V556.393064l136.138729-76.947977c29.595376-17.757225 35.514451-53.271676 23.6763-82.867052-17.757225-29.595376-53.271676-35.514451-82.867052-23.676301l-76.947977 47.352601V313.710983L846.427746 236.763006c29.595376-17.757225 35.514451-53.271676 23.6763-82.867052-17.757225-29.595376-53.271676-35.514451-82.867052-23.676301L710.289017 177.572254V59.190751c0-35.514451-23.676301-59.190751-59.190751-59.190751s-59.190751 23.676301-59.190752 59.190751v118.381503l-76.947976-41.433526c-29.595376-17.757225-65.109827-5.919075-76.947977 23.676301-17.757225 23.676301-11.83815 59.190751 17.757225 76.947977L591.907514 313.710983v106.543352l-76.947976-41.433526z" />
             </svg>
           </div>
@@ -45,7 +63,7 @@ const TractorDetail = () => {
               <span className="text-lg  font-semibold text-teal-500 ">
                 Bigha
               </span>
-              <p className="text-lg text-gray-600 font-bold">{data.bigha}</p>
+              <p className="text-lg text-gray-600 font-bold">{data?.bigha}</p>
             </div>
           </div>
         </div>
@@ -59,7 +77,7 @@ const TractorDetail = () => {
                 Total Income
               </span>
               <p className="text-lg text-gray-600 font-bold">
-                {data.totalIncome}
+                {data?.totalIncome}
               </p>
             </div>
           </div>
@@ -72,8 +90,7 @@ const TractorDetail = () => {
               xmlnsXlink="http://www.w3.org/1999/xlink"
               version="1.1"
               viewBox="0 0 90 95"
-              xmlSpace="preserve"
-            >
+              xmlSpace="preserve">
               <g>
                 <circle cx="41.2" cy="24.4" r="14.4" />
                 <path d="M62.3,47.8c-11.7,0-21.1,9.5-21.1,21.1S50.7,90,62.3,90s21.1-9.5,21.1-21.1S74,47.8,62.3,47.8z M47.2,59.9   c0.7-1.2,1.6-2.4,2.7-3.4c4.1-4.1,9.8-5.9,15.7-4.9c2.3,0.4,4.5,1.3,6.4,2.6c2.3,1.5,4.1,3.5,5.4,5.7c0.4,0.7,0.2,1.7-0.6,2.1   l-0.7,0.3c-3.5,1.6-7.5,1.6-11,0.1c-0.8-0.4-1.8-0.6-2.8-0.6c-1,0-1.9,0.2-2.8,0.6c-3.5,1.5-7.5,1.5-11-0.1L47.8,62   C47.1,61.6,46.8,60.6,47.2,59.9z M59.7,82.9l-0.2,1.7c-0.1,0.9-1,1.5-1.8,1.3c-2.9-0.8-5.7-2.3-7.9-4.5c-3.3-3.3-5.2-7.7-5.2-12.4   c0,0,0,0,0,0c0-1,1-1.7,1.9-1.4l2.9,0.8c2.9,0.8,5.5,2.5,7.3,4.9c0,0,0.1,0.1,0.1,0.1C58.9,76,60,79.4,59.7,82.9z M62.5,72.4   c-2.1,0.1-3.8-1.6-3.7-3.7c0.1-1.8,1.5-3.2,3.3-3.3c2.1-0.1,3.8,1.6,3.7,3.7C65.8,70.9,64.3,72.3,62.5,72.4z M74.7,81.3   c-2.2,2.2-4.9,3.8-7.8,4.5c-0.9,0.2-1.7-0.4-1.8-1.3l-0.1-1.7c-0.3-3.5,0.8-6.9,2.9-9.6c0,0,0.1-0.1,0.1-0.1   c1.8-2.4,4.4-4.1,7.3-4.9l2.8-0.8c0.9-0.2,1.8,0.4,1.8,1.4c0,0,0,0,0,0C79.9,73.6,78.1,78,74.7,81.3z" />
@@ -87,7 +104,7 @@ const TractorDetail = () => {
                 Driver Money
               </span>
               <p className="text-lg text-gray-600 font-bold">
-                {data.driverMoney}
+                {data?.driverMoney}
               </p>
             </div>
           </div>
@@ -100,8 +117,7 @@ const TractorDetail = () => {
               xmlnsXlink="http://www.w3.org/1999/xlink"
               version="1.1"
               viewBox="0 0 100 120"
-              xmlSpace="preserve"
-            >
+              xmlSpace="preserve">
               <g>
                 <ellipse
                   transform="matrix(0.8506512 -0.5257304 0.5257304 0.8506512 -6.1192708 30.1462154)"
@@ -120,7 +136,7 @@ const TractorDetail = () => {
                 Helper Money
               </span>
               <p className="text-lg text-gray-600 font-bold">
-                {data.helperMoney}
+                {data?.helperMoney}
               </p>
             </div>
           </div>
@@ -130,8 +146,7 @@ const TractorDetail = () => {
             <svg
               className="w-7 h-7 text-white fill-current"
               xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-            >
+              viewBox="0 0 24 24">
               <path d="M8 5H19C19.5523 5 20 5.44772 20 6V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V11L8 5ZM13 1H18C18.5523 1 19 1.44772 19 2V4H12V2C12 1.44772 12.4477 1 13 1ZM6 12V19H8V12H6Z"></path>
             </svg>
           </div>
@@ -140,7 +155,7 @@ const TractorDetail = () => {
               <span className="text-lg  font-semibold text-black ">
                 Oil Liter
               </span>
-              <p className="text-lg text-gray-600 font-bold">{data.oil}</p>
+              <p className="text-lg text-gray-600 font-bold">{data?.oil}</p>
             </div>
           </div>
         </div>
@@ -149,8 +164,7 @@ const TractorDetail = () => {
             <svg
               className="w-7 h-7 text-white fill-current"
               xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-            >
+              viewBox="0 0 24 24">
               <path d="M8 5H19C19.5523 5 20 5.44772 20 6V21C20 21.5523 19.5523 22 19 22H5C4.44772 22 4 21.5523 4 21V11L8 5ZM13 1H18C18.5523 1 19 1.44772 19 2V4H12V2C12 1.44772 12.4477 1 13 1ZM6 12V19H8V12H6Z"></path>
             </svg>
           </div>
@@ -160,7 +174,7 @@ const TractorDetail = () => {
                 Oil Money
               </span>
               <p className="text-lg text-gray-600 font-bold">
-                {data.oileMoney}
+                {data?.oileMoney}
               </p>
             </div>
           </div>
@@ -170,8 +184,7 @@ const TractorDetail = () => {
             <svg
               className="w-8 h-8 text-white fill-current"
               xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 24 24"
-            >
+              viewBox="0 0 24 24">
               <path d="M12 3.09747L7.05025 8.04722C4.31658 10.7809 4.31658 15.213 7.05025 17.9467C9.78392 20.6804 14.2161 20.6804 16.9497 17.9467C19.6834 15.213 19.6834 10.7809 16.9497 8.04722L12 3.09747ZM12 0.269043L18.364 6.633C21.8787 10.1477 21.8787 15.8462 18.364 19.3609C14.8492 22.8756 9.15076 22.8756 5.63604 19.3609C2.12132 15.8462 2.12132 10.1477 5.63604 6.633L12 0.269043ZM7 12.997H17C17 15.7584 14.7614 17.997 12 17.997C9.23858 17.997 7 15.7584 7 12.997Z"></path>
             </svg>
           </div>
@@ -181,7 +194,7 @@ const TractorDetail = () => {
                 Oil Liter Expense
               </span>
               <p className="text-lg text-gray-600 font-bold">
-                {data.oilLiterPoient}
+                {data?.oilLiterPoient}
               </p>
             </div>
           </div>
@@ -196,7 +209,7 @@ const TractorDetail = () => {
                 Out Standing Amount
               </span>
               <p className="text-lg text-gray-600 font-bold">
-                {data.outstandingamount}
+                {data?.outstandingamount}
               </p>
             </div>
           </div>
@@ -209,8 +222,7 @@ const TractorDetail = () => {
               xmlnsXlink="http://www.w3.org/1999/xlink"
               version="1.1"
               viewBox="0 0 100 120"
-              xmlSpace="preserve"
-            >
+              xmlSpace="preserve">
               <g>
                 <ellipse
                   transform="matrix(0.8506512 -0.5257304 0.5257304 0.8506512 -6.1192708 30.1462154)"
@@ -229,8 +241,8 @@ const TractorDetail = () => {
                 Helper Name
               </span>
               <p className="text-lg text-gray-600 font-bold">
-                {data.helperName.charAt(0).toUpperCase() +
-                  data.helperName.slice(1)}
+                {data?.helperName.charAt(0).toUpperCase() +
+                  data?.helperName.slice(1)}
               </p>
             </div>
           </div>
@@ -244,7 +256,7 @@ const TractorDetail = () => {
               <span className="text-lg  font-semibold text-[#E94560]">
                 Expense
               </span>
-              <p className="text-lg text-gray-600 font-bold">{data.expence}</p>
+              <p className="text-lg text-gray-600 font-bold">{data?.expence}</p>
             </div>
           </div>
         </div>
@@ -258,27 +270,49 @@ const TractorDetail = () => {
                 Total Expense
               </span>
               <p className="text-lg text-gray-600 font-bold">
-                {data.totalExpense}
+                {data?.totalExpense}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="flex w-full  overflow-hidden bg-white rounded-lg card-shdow">
+          <div className="flex items-center justify-center w-12 bg-[#016A70]">
+            <FaMoneyBillTransfer className="w-7 h-7 text-white" />
+          </div>
+          <div className="px-4 py-2 -mx-3 ">
+            <div className="mx-3 ">
+              <span className="text-lg  font-semibold text-[#016A70]">
+                Total Amount Deposited
+              </span>
+              <p className="text-lg text-gray-600 font-bold">
+                {data?.totalAmountDeposited}
               </p>
             </div>
           </div>
         </div>
       </div>
       <div className=" mt-5 mb-5 ">
-        <div className="  flex justify-between px-1">
-          <button className="btn btn-circle bg-red-500">
-            <MdDeleteForever className=" w-6 h-6 text-white" />
+        <div className="  flex justify-between px-1 xl:px-3">
+          <button
+            className="btn btn-circle bg-red-500"
+            onClick={() => document.getElementById("my_modal_5").showModal()}>
+            <MdDeleteForever className=" w-7 h-7 text-white" />
           </button>
-          <button className="btn btn-circle bg-blue-500">
+          <DeleteModal id={data?._id} />
+
+          <UpdateModal id={data?._id} />
+
+          <label
+            className="btn btn-circle bg-blue-500"
+            htmlFor="__update_modal__">
             <svg
               className="svg-icon w-6 h-6 text-white"
               viewBox="0 0 1024 1024"
               version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+              xmlns="http://www.w3.org/2000/svg">
               <path d="M323.072 100.864h377.856c28.16 0 50.688-22.528 50.688-50.688S728.576 0 700.928 0H323.072c-28.16 0-50.688 22.528-50.688 50.688s23.04 50.176 50.688 50.176zM189.952 286.72h643.584c28.16 0 50.688-22.528 50.688-50.688s-22.528-50.688-50.688-50.688H189.952c-28.16 0-50.688 22.528-50.688 50.688s23.04 50.688 50.688 50.688zM936.448 374.784H87.552C39.936 374.784 1.024 413.696 1.024 460.8v476.672c0 47.616 38.4 86.016 86.016 86.016h849.408c47.616 0 86.016-38.4 86.016-86.016V460.8c0.512-47.104-38.4-86.016-86.016-86.016z m-297.984 259.584c-8.704 8.704-20.48 13.312-31.744 13.312-11.776 0-23.04-4.608-31.744-13.312l-17.408-17.408V890.88c0 25.088-20.48 45.056-45.056 45.056s-45.056-20.48-45.056-45.056v-273.92l-17.408 17.408c-17.408 17.408-46.08 17.408-64 0-17.408-17.408-17.408-46.08 0-64L480.256 476.16c8.704-8.704 19.968-13.312 31.744-13.312s23.552 4.608 31.744 13.312l94.208 94.208c17.92 17.92 17.92 46.592 0.512 64z" />
             </svg>
-          </button>
+          </label>
         </div>
       </div>
     </div>
