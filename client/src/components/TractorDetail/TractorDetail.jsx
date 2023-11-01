@@ -2,30 +2,36 @@ import { FaMoneyBillWaveAlt } from "react-icons/fa";
 import { MdDeleteForever } from "react-icons/md";
 import { FaMoneyBillTransfer } from "react-icons/fa6";
 import "./TractorDetail.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import DeleteModal from "./Modal/DeleteModal";
 import { useTractorGetByIdQuery } from "../../features/api/queryApi";
 import { InfinitySpin } from "react-loader-spinner";
 import UpdateModal from "./Modal/UpdateModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const TractorDetail = () => {
+  // get url id ⤵
   const { id } = useParams();
-
+  // get url id ⤴
+  // navigate hook ⤵
+  const navigate = useNavigate();
+  // navigate hook ⤴
+  // get by id tractor Detail ⤵
   const { data: isData, isLoading } = useTractorGetByIdQuery(id);
-
   const { data } = isData || {};
-
+  // get by id tractor Detail ⤴
   //? loading ⤵
   if (isLoading) {
     return (
-      <div className=" flex justify-center items-center h-screen">
+      <div className="flex justify-center items-center h-screen">
         <InfinitySpin width="200" color="black" />
       </div>
     );
-  } else {
   }
   //? loading ⤴
+
+  // top scroll
+  window.scrollTo({ top: 1, behavior: "smooth" });
 
   return (
     <div className="">
@@ -294,14 +300,111 @@ const TractorDetail = () => {
       <div className=" mt-5 mb-5 ">
         <div className="  flex justify-between px-1 xl:px-3">
           <button
+            className="btn btn-circle bg-indigo-500"
+            onClick={() => navigate("/alltractor")}>
+            <svg
+              className="w-8 h-8"
+              id="arrow-narrow-left_24"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlnsXlink="http://www.w3.org/1999/xlink">
+              <rect
+                width={24}
+                height={24}
+                stroke="none"
+                fill="#000000"
+                opacity={0}
+              />
+              <g transform="matrix(1 0 0 1 12 12)">
+                <g style={{}}>
+                  <g transform="matrix(1 0 0 1 0 0)">
+                    <path
+                      style={{
+                        stroke: "none",
+                        strokeWidth: 2,
+                        strokeDasharray: "none",
+                        strokeLinecap: "round",
+                        strokeDashoffset: 0,
+                        strokeLinejoin: "round",
+                        strokeMiterlimit: 4,
+                        fill: "none",
+                        fillRule: "nonzero",
+                        opacity: 1,
+                      }}
+                      transform=" translate(-12, -12)"
+                      d="M 0 0 L 24 0 L 24 24 L 0 24 z"
+                      strokeLinecap="round"
+                    />
+                  </g>
+                  <g transform="matrix(1 0 0 1 0 0)">
+                    <line
+                      style={{
+                        stroke: "rgb(255, 255, 255)",
+                        strokeWidth: 2,
+                        strokeDasharray: "none",
+                        strokeLinecap: "round",
+                        strokeDashoffset: 0,
+                        strokeLinejoin: "round",
+                        strokeMiterlimit: 4,
+                        fill: "none",
+                        fillRule: "nonzero",
+                        opacity: 1,
+                      }}
+                      x1={-7}
+                      y1={0}
+                      x2={7}
+                      y2={0}
+                    />
+                  </g>
+                  <g transform="matrix(1 0 0 1 -5 2)">
+                    <line
+                      style={{
+                        stroke: "rgb(255, 255, 255)",
+                        strokeWidth: 2,
+                        strokeDasharray: "none",
+                        strokeLinecap: "round",
+                        strokeDashoffset: 0,
+                        strokeLinejoin: "round",
+                        strokeMiterlimit: 4,
+                        fill: "none",
+                        fillRule: "nonzero",
+                        opacity: 1,
+                      }}
+                      x1={-2}
+                      y1={-2}
+                      x2={2}
+                      y2={2}
+                    />
+                  </g>
+                  <g transform="matrix(1 0 0 1 -5 -2)">
+                    <line
+                      style={{
+                        stroke: "rgb(255, 255, 255)",
+                        strokeWidth: 2,
+                        strokeDasharray: "none",
+                        strokeLinecap: "round",
+                        strokeDashoffset: 0,
+                        strokeLinejoin: "round",
+                        strokeMiterlimit: 4,
+                        fill: "none",
+                        fillRule: "nonzero",
+                        opacity: 1,
+                      }}
+                      x1={-2}
+                      y1={2}
+                      x2={2}
+                      y2={-2}
+                    />
+                  </g>
+                </g>
+              </g>
+            </svg>
+          </button>
+          <button
             className="btn btn-circle bg-red-500"
             onClick={() => document.getElementById("my_modal_5").showModal()}>
             <MdDeleteForever className=" w-7 h-7 text-white" />
           </button>
-          <DeleteModal id={data?._id} />
-
-          <UpdateModal id={data?._id} />
-
           <label
             className="btn btn-circle bg-blue-500"
             htmlFor="__update_modal__">
@@ -315,6 +418,8 @@ const TractorDetail = () => {
           </label>
         </div>
       </div>
+      <DeleteModal id={data?._id} />
+      <UpdateModal id={data?._id} />
     </div>
   );
 };

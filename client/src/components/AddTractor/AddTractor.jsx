@@ -5,12 +5,13 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useForm } from "react-hook-form";
 import { useAddTractorMutation } from "../../features/api/mutationApi";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const AddTractor = () => {
   const [startDate, setStartDate] = useState(new Date());
-
+  const navigate = useNavigate();
   //? add data redux hook mutation start ⤵
-  const [setPost, { data: postData }] = useAddTractorMutation();
+  const [setPost, { data: postData, isLoading }] = useAddTractorMutation();
   //? add data redux hook mutation end ⤴
   //? hook form user ⤵
   const { register, handleSubmit, reset } = useForm();
@@ -64,8 +65,9 @@ const AddTractor = () => {
     if (postData?.status) {
       toast.success("Data Saved Success");
       reset();
+      navigate("/alltractor");
     }
-    if (!postData?.status && postData?.status === false) {
+    if (!postData?.status && postData?.statusCode === 500) {
       toast.error("Data Saved not Success");
     }
   }, [postData, reset]);
@@ -176,9 +178,11 @@ const AddTractor = () => {
             </div>
             <div className="flex justify-end mt-6">
               <button
+                disabled={isLoading && true}
                 type="submit"
-                className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
-                Save
+                className="px-8 py-2.5 leading-5 text-white flex justify-center items-center transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600">
+                {isLoading || "Save"}
+                {isLoading && <span className="loading loading-spinner"></span>}
               </button>
             </div>
           </form>

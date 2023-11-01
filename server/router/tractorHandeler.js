@@ -8,8 +8,14 @@ const Tractor = model("Tractor", tractorSchema);
 
 //? Tractor all get router ⤵
 router.get("/", async (req, res) => {
+  const page = req.query.page || 1;
+  const pageSize = 17 || 1;
   try {
-    const data = await Tractor.find({}).select("date");
+    const skip = (page - 1) * pageSize;
+    const data = await Tractor.find({})
+      .skip(skip)
+      .limit(pageSize)
+      .select("date");
     res.send({
       message: "Successfully Find",
       data: data.reverse(),
@@ -111,5 +117,28 @@ router.put("/:id", async (req, res) => {
   }
 });
 //? Tractor Update router ⤴
+
+//? Tractor Total Details router ⤵
+router.get("/total/details", async (req, res) => {
+  try {
+    const data = await Tractor.find({}).select(
+      "totalIncome totalExpense helperMoney driverMoney -_id"
+    );
+    res.send({
+      message: "Successfully Find Details",
+      data: data,
+      status: true,
+      statusCode: 200,
+    });
+  } catch (err) {
+    console.error(err.message);
+    res.send({
+      message: "successfully Not Find Details",
+      status: false,
+      statusCode: 500,
+    });
+  }
+});
+//? Tractor Total Details router ⤴
 
 module.exports = router;
